@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Earth Rotates | 지구는 돈다</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Noto+Sans+SC:wght@300;400&family=Noto+Sans+JP:wght@300;400&family=Noto+Sans+KR:wght@200;300;400;600&family=Noto+Sans+Arabic:wght@300;400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-lang="en">
+    <!-- Language Selector -->
+    <div class="lang-selector">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="zh">中文</button>
+        <button class="lang-btn" data-lang="ja">日本語</button>
+        <button class="lang-btn" data-lang="ko">한국어</button>
+        <button class="lang-btn" data-lang="ar">عربي</button>
+    </div>
+
+    <!-- Three.js Container -->
+    <div id="three-container"></div>
+    
+    <!-- Planet Labels (HTML overlay) -->
+    <div id="planet-labels"></div>
+
+    <!-- Progress -->
+    <div class="progress-ring">
+        <svg viewBox="0 0 100 100">
+            <circle class="bg" cx="50" cy="50" r="45"/>
+            <circle class="fill" cx="50" cy="50" r="45"/>
+        </svg>
+        <span class="progress-text">01</span>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Section 1: Hero -->
+        <section class="section" data-index="1" data-scene="intro">
+            <div class="content">
+                <p class="era" data-i18n="era"></p>
+                <h1>
+                    <span class="line" data-i18n="title1"></span>
+                    <span class="line accent" data-i18n="title2"></span>
+                </h1>
+                <p class="subtitle" data-i18n="subtitle"></p>
+            </div>
+        </section>
+
+        <!-- Section 2: Part 1 -->
+        <section class="section" data-index="2" data-scene="flat">
+            <div class="content">
+                <span class="part-label">Part 1</span>
+                <h2 data-i18n="part1_title"></h2>
+                <p class="period" data-i18n="part1_period"></p>
+                <blockquote data-i18n="part1_quote"></blockquote>
+                <p class="desc" data-i18n="part1_desc"></p>
+            </div>
+        </section>
+
+        <!-- Section 3: Part 2 -->
+        <section class="section" data-index="3" data-scene="geocentric">
+            <div class="content">
+                <span class="part-label">Part 2</span>
+                <h2 data-i18n="part2_title"></h2>
+                <p class="period" data-i18n="part2_period"></p>
+                <blockquote data-i18n="part2_quote"></blockquote>
+                <p class="desc" data-i18n="part2_desc"></p>
+            </div>
+        </section>
+
+        <!-- Section 4: Part 3 -->
+        <section class="section" data-index="4" data-scene="heliocentric">
+            <div class="content">
+                <span class="part-label">Part 3</span>
+                <h2 data-i18n="part3_title"></h2>
+                <p class="period" data-i18n="part3_period"></p>
+                <blockquote data-i18n="part3_quote"></blockquote>
+                <p class="desc" data-i18n="part3_desc"></p>
+            </div>
+        </section>
+
+        <!-- Section 5: Part 4 -->
+        <section class="section" data-index="5" data-scene="pendulum">
+            <div class="content">
+                <span class="part-label">Part 4</span>
+                <h2 data-i18n="part4_title"></h2>
+                <p class="period" data-i18n="part4_period"></p>
+                <blockquote data-i18n="part4_quote"></blockquote>
+                <p class="desc" data-i18n="part4_desc"></p>
+            </div>
+        </section>
+
+        <!-- Section 6: Finale -->
+        <section class="section finale" data-index="6" data-scene="finale">
+            <div class="content center">
+                <p class="finale-quote" data-i18n="finale_quote"></p>
+                <p class="finale-attr" data-i18n="finale_attr"></p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Navigation Dots -->
+    <nav class="nav-dots">
+        <span class="dot active" data-target="1"></span>
+        <span class="dot" data-target="2"></span>
+        <span class="dot" data-target="3"></span>
+        <span class="dot" data-target="4"></span>
+        <span class="dot" data-target="5"></span>
+        <span class="dot" data-target="6"></span>
+    </nav>
+
+    <!-- Scene Label -->
+    <div class="scene-label" id="scene-label">INTRO</div>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

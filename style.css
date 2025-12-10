@@ -1,0 +1,599 @@
+/* ========================================
+   The Earth Rotates - 3D Multilingual Edition
+   ======================================== */
+
+:root {
+    --bg: #000000;
+    --text: #f5f3ef;
+    --text-dim: #6a6a6a;
+    --gold: #d4a84b;
+    --gold-dim: rgba(212, 168, 75, 0.3);
+    --accent: #e8d5b5;
+    
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Noto Sans KR', sans-serif;
+}
+
+body[data-lang="ja"] { --font-body: 'Noto Sans JP', sans-serif; }
+body[data-lang="zh"] { --font-body: 'Noto Sans SC', sans-serif; }
+body[data-lang="ar"] { --font-body: 'Noto Sans Arabic', sans-serif; }
+body[data-lang="ko"] { --font-body: 'Noto Sans KR', sans-serif; }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.8;
+}
+
+body[data-lang="ar"] {
+    direction: rtl;
+}
+
+body[data-lang="ar"] .content {
+    text-align: right;
+}
+
+body[data-lang="ar"] blockquote {
+    padding-left: 0;
+    padding-right: 20px;
+    border-left: none;
+    border-right: 2px solid var(--gold-dim);
+}
+
+body[data-lang="ar"] .nav-dots {
+    right: auto;
+    left: 40px;
+}
+
+body[data-lang="ar"] .progress-ring {
+    right: auto;
+    left: 40px;
+}
+
+::selection {
+    background: var(--gold);
+    color: var(--bg);
+}
+
+/* ========================================
+   Planet Labels
+   ======================================== */
+#planet-labels {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+}
+
+.planet-label {
+    position: absolute;
+    padding: 4px 10px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--gold-dim);
+    border-radius: 12px;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    white-space: nowrap;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.planet-label.visible {
+    opacity: 1;
+}
+
+.planet-label.earth-label {
+    border-color: #00d4aa;
+    color: #00d4aa;
+}
+
+.planet-label.sun-label {
+    border-color: #ffd700;
+    color: #ffd700;
+    font-size: 0.8rem;
+}
+
+.planet-label::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    height: 5px;
+    background: var(--gold-dim);
+}
+
+.planet-label.sun-label::after {
+    background: #ffd700;
+}
+
+.planet-label.earth-label::after {
+    background: #00d4aa;
+}
+
+/* ========================================
+   Language Selector
+   ======================================== */
+.lang-selector {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+    z-index: 1000;
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 168, 75, 0.2);
+    border-radius: 30px;
+}
+
+.lang-btn {
+    padding: 6px 12px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    color: var(--text-dim);
+    font-family: inherit;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+    color: var(--text);
+    border-color: var(--gold-dim);
+}
+
+.lang-btn.active {
+    color: var(--gold);
+    border-color: var(--gold);
+    background: rgba(212, 168, 75, 0.1);
+}
+
+/* ========================================
+   Three.js Container
+   ======================================== */
+#three-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+#three-container canvas {
+    display: block;
+}
+
+/* ========================================
+   Progress Ring
+   ======================================== */
+.progress-ring {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    width: 60px;
+    height: 60px;
+    z-index: 100;
+    opacity: 0;
+    animation: fadeIn 1s 1s forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+.progress-ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.progress-ring circle {
+    fill: none;
+    stroke-width: 1;
+}
+
+.progress-ring .bg {
+    stroke: var(--gold-dim);
+}
+
+.progress-ring .fill {
+    stroke: var(--gold);
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+}
+
+/* ========================================
+   Scene Label
+   ======================================== */
+.scene-label {
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    z-index: 100;
+    opacity: 0;
+    animation: fadeIn 1s 1.5s forwards;
+}
+
+/* ========================================
+   Navigation Dots
+   ======================================== */
+.nav-dots {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 100;
+    opacity: 0;
+    animation: fadeIn 1s 1.2s forwards;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border: 1px solid var(--gold-dim);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dot:hover {
+    border-color: var(--gold);
+    transform: scale(1.3);
+}
+
+.dot.active {
+    background: var(--gold);
+    border-color: var(--gold);
+    box-shadow: 0 0 20px var(--gold-dim);
+}
+
+/* ========================================
+   Main Content
+   ======================================== */
+main {
+    position: relative;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 100px 80px;
+    position: relative;
+    pointer-events: auto;
+}
+
+/* ========================================
+   Content
+   ======================================== */
+.content {
+    max-width: 550px;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 168, 75, 0.1);
+    border-radius: 4px;
+}
+
+.content.center {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.part-label {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 15px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+}
+
+.section.visible .part-label {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.era {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.section.visible .era {
+    opacity: 1;
+}
+
+h1 {
+    margin-bottom: 25px;
+}
+
+h1 .line {
+    display: block;
+    font-weight: 200;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.2;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+h1 .line:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+.section.visible h1 .line {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h1 .accent {
+    font-weight: 600;
+    color: var(--gold);
+    font-size: clamp(3rem, 8vw, 6rem);
+    text-shadow: 0 0 60px rgba(212, 168, 75, 0.3);
+}
+
+h2 {
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 300;
+    margin-bottom: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease 0.1s;
+}
+
+.section.visible h2 {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.period {
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 25px;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.2s;
+}
+
+.section.visible .period {
+    opacity: 1;
+}
+
+blockquote {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+    font-style: italic;
+    color: var(--accent);
+    margin: 25px 0;
+    padding-left: 20px;
+    border-left: 2px solid var(--gold-dim);
+    opacity: 0;
+    transform: translateX(-15px);
+    transition: all 0.8s ease 0.3s;
+}
+
+.section.visible blockquote {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.subtitle {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text-dim);
+    opacity: 0;
+    transition: opacity 0.8s ease 0.4s;
+}
+
+.section.visible .subtitle {
+    opacity: 1;
+}
+
+.desc {
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 2;
+    color: var(--text-dim);
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.8s ease 0.4s;
+}
+
+.section.visible .desc {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   Finale
+   ======================================== */
+.finale {
+    justify-content: center;
+}
+
+.finale .content {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.finale-quote {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 3vw, 2.2rem);
+    font-style: italic;
+    color: var(--text);
+    margin-bottom: 15px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s ease 0.2s;
+}
+
+.section.finale.visible .finale-quote {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.finale-attr {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transition: opacity 1s ease 0.5s;
+}
+
+.section.finale.visible .finale-attr {
+    opacity: 1;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+@media (max-width: 768px) {
+    .lang-selector {
+        top: 15px;
+        padding: 6px 8px;
+        gap: 3px;
+        flex-wrap: wrap;
+        max-width: 90%;
+        justify-content: center;
+    }
+    
+    .lang-btn {
+        padding: 5px 8px;
+        font-size: 0.65rem;
+    }
+    
+    .section {
+        padding: 100px 20px 80px;
+        justify-content: center;
+    }
+    
+    .content {
+        padding: 25px;
+        max-width: 100%;
+    }
+    
+    .nav-dots {
+        right: 15px;
+        gap: 12px;
+    }
+    
+    body[data-lang="ar"] .nav-dots {
+        left: 15px;
+    }
+    
+    .dot {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .progress-ring {
+        top: 70px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+    
+    body[data-lang="ar"] .progress-ring {
+        left: 20px;
+    }
+    
+    .scene-label {
+        bottom: 20px;
+        left: 20px;
+        font-size: 0.6rem;
+    }
+    
+    blockquote {
+        padding-left: 15px;
+        font-size: 1rem;
+    }
+    
+    body[data-lang="ar"] blockquote {
+        padding-right: 15px;
+    }
+    
+    .planet-label {
+        font-size: 0.6rem;
+        padding: 3px 8px;
+    }
+}
+
+/* ========================================
+   Scrollbar
+   ======================================== */
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gold-dim);
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gold);
+}
