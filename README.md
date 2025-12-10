@@ -1,82 +1,87 @@
-# 🌍 지구 자전의 역사
+🌍 The History of Earth's Rotation
+An interactive website where users can experience the epic journey of humanity's understanding of the cosmos.
 
-인류가 우주를 이해하기까지의 장대한 여정을 인터랙티브하게 체험할 수 있는 웹사이트입니다.
+📖 Content Overview
+Part 1: The Era of Intuition (Ancient Times ~ 6th Century BC)
+Introduction to the Flat Earth Theory
 
-## 📖 내용 구성
+Worldviews of Ancient Civilizations
 
-### Part 1: 직관의 시대 (고대 ~ 기원전 6세기)
-- 평면설(Flat Earth) 소개
-- 고대 문명의 세계관
+Part 2: The Discovery of Form (6th Century BC ~ 16th Century)
+Emergence of the Spherical Earth Theory (Pythagoras, Aristotle, Eratosthenes)
 
-### Part 2: 형태의 발견 (기원전 6세기 ~ 16세기)
-- 구형설의 등장 (피타고라스, 아리스토텔레스, 에라토스테네스)
-- 천동설(Geocentrism) - 프톨레마이오스 체계
+Geocentrism - The Ptolemaic System
 
-### Part 3: 관점의 전복 (16세기 ~ 17세기)
-- 코페르니쿠스의 지동설(Heliocentrism)
-- 갈릴레오의 망원경 관측
-- 케플러의 행성 운동 법칙
+Part 3: The Paradigm Shift (16th Century ~ 17th Century)
+Copernican Heliocentrism
 
-### Part 4: 물리학적 증명 (17세기 후반 ~ 19세기)
-- 뉴턴의 만유인력
-- 푸코의 진자 실험
+Galileo's Telescopic Observations
 
-## 🎮 인터랙티브 체험
+Kepler's Laws of Planetary Motion
 
-### 1. 천동설 vs 지동설 시뮬레이션
-스위치 하나로 두 가지 세계관을 전환하며 비교할 수 있습니다:
-- **천동설**: 지구가 중심에 고정, 태양과 달이 지구 주위를 공전
-- **지동설**: 태양이 중심, 지구가 자전하며 공전
+Part 4: Physical Proof (Late 17th Century ~ 19th Century)
+Newton's Law of Universal Gravitation
 
-### 2. 푸코의 진자 시뮬레이션
-- 진자의 진동면이 시간에 따라 회전하는 모습 관찰
-- 위도 조절 기능으로 다양한 지역에서의 진자 운동 확인
-- 궤적 표시 기능
+Foucault's Pendulum Experiment
 
-## 🛠 기술 스택
+🎮 Interactive Experience
+1. Geocentrism vs. Heliocentrism Simulation
+Switch between and compare two worldviews with a single toggle:
 
-- **HTML5**: 시맨틱 마크업
-- **CSS3**: 커스텀 프로퍼티, 그래디언트, 애니메이션
-- **JavaScript (ES6+)**: 모듈화된 코드 구조
-- **Three.js**: 3D 별 파티클 배경
-- **GSAP (ScrollTrigger)**: 스크롤 기반 애니메이션
-- **Canvas API**: 2D 시뮬레이션 렌더링
+Geocentrism: Earth is fixed at the center, with the Sun and Moon orbiting it.
 
-## 🚀 실행 방법
+Heliocentrism: The Sun is at the center, with Earth rotating and orbiting around it.
 
-1. 프로젝트 폴더에서 로컬 서버 실행:
-   ```bash
-   # Python
-   python -m http.server 8000
-   
-   # Node.js (npx)
-   npx serve
-   
-   # VS Code Live Server 확장 사용
-   ```
+2. Foucault Pendulum Simulation
+Observe the plane of the pendulum's oscillation rotating over time.
 
-2. 브라우저에서 `http://localhost:8000` 접속
+Adjust latitude to see how the pendulum behaves in different regions.
 
-## 📁 파일 구조
+Trajectory display feature.
 
-```
-├── index.html    # 메인 HTML 파일
-├── style.css     # 스타일시트
-├── main.js       # 메인 JavaScript
-└── README.md     # 프로젝트 설명
-```
+🛠 Tech Stack
+HTML5: Semantic Markup
 
-## 🎨 디자인 특징
+CSS3: Custom Properties, Gradients, Animations
 
-- **우주/천문학 테마**: 어두운 배경에 황금색, 구리색 악센트
-- **세리프 폰트**: 고전적이면서 현대적인 타이포그래피
-- **스크롤 애니메이션**: 부드러운 화면 전환 효과
-- **인터랙티브 요소**: 호버 효과, 토글 스위치, 슬라이더
+JavaScript (ES6+): Modular Code Structure
 
-## 📜 라이선스
+Three.js: 3D Star Particle Background
 
+GSAP (ScrollTrigger): Scroll-based Animations
+
+Canvas API: 2D Simulation Rendering
+
+🚀 How to Run
+Start a local server in the project folder:
+
+Bash
+
+# Python
+python -m http.server 8000
+
+# Node.js (npx)
+npx serve
+
+# Or use the 'Live Server' extension in VS Code
+Open http://localhost:8000 in your browser.
+
+📁 File Structure
+├── index.html    # Main HTML file
+├── style.css     # Stylesheet
+├── main.js       # Main JavaScript
+└── README.md     # Project Description
+🎨 Design Features
+Space/Astronomy Theme: Dark background with gold and copper accents.
+
+Serif Fonts: Classical yet modern typography.
+
+Scroll Animations: Smooth screen transition effects.
+
+Interactive Elements: Hover effects, toggle switches, and sliders.
+
+📜 License
 MIT License
 
----
+"And yet it moves." — Galileo Galilei
 
-*"그래도 지구는 돈다." — 갈릴레오 갈릴레이*
